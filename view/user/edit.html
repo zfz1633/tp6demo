@@ -1,0 +1,70 @@
+{extend name='public/base'}
+
+{block name='title'}后台用户修改{/block}
+
+{block name='main'}
+<!-- 添加用户UI -->
+<form action="{:url('/user/'.$user.id)}" method="post">
+    <input type="hidden" name="_method" value="PUT"><!-- PUT类型资源路由接收到会自动跳转到update方法-->
+    <fieldset class="w-75">
+        <div class="form-group row">
+            <label for="username" class="col-3 col-form-label">用户名</label>
+            <div class="col-7">
+                <input type="text" disabled value="{$user.username}" id="username" name="username" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-3 col-form-label">新密码</label>
+            <div class="col-7">
+                <input type="password" id="password" name="newpassword" class="form-control" placeholder="请输入新密码 (不填就不改)">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="passwordnot" class="col-3 col-form-label">新密码确认</label>
+            <div class="col-7">
+                <input type="password" id="passwordnot" name="newpasswordnot" class="form-control" placeholder="请输入新密码确认">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-3">性别</label>
+            <div class="col-7">
+                <label for="man" class="col-form-label-sm">
+                    <input type="radio" id="man" name="gender" value="男" {$user.gender == '男'? 'checked':''}>
+                    男
+                </label>
+                <label for="woman" class="col-form-label-sm">
+                    <input type="radio" id="woman" name="gender" value="女" {$user.gender == '女'? 'checked':''}>
+                    女
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-3 col-form-label">电子邮箱</label>
+            <div class="col-7">
+                <input type="text" disabled value="{$user.email}" id="email" name="email" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-3 col-form-label">状态</label>
+            <div class="col-5">
+                <select name="status" id="status" class="form-control w-50">
+                    <option value="0" {$user.status == '待审核' ? 'selected' : ''}>待审核</option>
+                    <option value="1" {$user.status == '正常' ? 'selected' : ''}>正常</option>
+                </select>
+            </div>
+            <div class="col-2 text-right col-form-label">
+                <a href="{:url('/user')}" class="col-form-label-sm">返回列表
+                </a>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-3"></label>
+            <div class="col-7">
+                <input type="hidden" value="{:token()}" name="__token__">
+                <button class="btn btn-success w-100">修改用户</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{/block}

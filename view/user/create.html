@@ -1,0 +1,73 @@
+{extend name='public/base'}
+{block name='title'}后台用户添加{/block}
+{block name='main'}
+
+<!-- 添加用户UI  提交路径还是user',因为是post方式提交，会自动进入到save方法中-->
+<form action="{:url('/user')}" method="post">
+    <fieldset class="w-75">
+        <div class="form-group row">
+            <label for="username" class="col-2 col-form-label">用户名</label>
+            <div class="col-8">
+                <input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-2 col-form-label">密码</label>
+            <div class="col-8">
+                <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="passwordnot" class="col-2 col-form-label">密码确认</label>
+            <div class="col-8">
+                <input type="password" id="passwordnot" name="passwordnot" class="form-control" placeholder="请输入密码确认">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">性别</label>
+            <div class="col-8">
+                <label for="man" class="col-form-label-sm">
+                    <input type="radio" id="man" name="gender" value="男" checked>
+                    男
+                </label>
+                <label for="woman" class="col-form-label-sm">
+                    <input type="radio" id="woman" name="gender" value="女">
+                    女
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-2 col-form-label">电子邮箱</label>
+            <div class="col-8">
+                <input type="text" id="email" name="email" class="form-control" placeholder="请输入电子邮箱">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-2 col-form-label">喜好</label>
+            <div class="col-8">
+                <input type="text" id="content" name="content" class="form-control" placeholder="请输入喜好">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2"></label>
+            <div class="col-6">
+                <label for="agree">
+                    <input type="checkbox" id="agree" name="agree">
+                    <span class="col-form-label-sm">我已同意看视频不喷老师的协议</span>
+                </label>
+            </div>
+            <div class="col-2 text-right">
+                <a href="{:url('/user')}" class="col-form-label-sm">返回列表
+                </a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2"></label>
+            <div class="col-8">
+                <input type="hidden" value="{:token()}" name="__token__">
+                <button class="btn btn-success w-100">添加用户</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{/block}

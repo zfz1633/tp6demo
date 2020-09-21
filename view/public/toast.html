@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提示</title>
+    <!-- 移动设备优先 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {css href="__CSS__/bootstrap.min.css"}
+    {css href="__CSS__/style.css"}
+
+</head>
+<body>
+
+<div class="d-flex vw-100 vh-100 bg-light justify-content-center
+align-items-center">
+    <div class="toast show mb-5 pl-3 pr-3">
+        <div class="toast-header">
+            <strong>● 系统提示</strong>
+        </div>
+        <div class="toast-body">
+            <ol class="text-danger">
+                {volist name="infos" id="item"}
+                <li>{$item}</li>
+                {/volist}
+            </ol>
+            <a href="{$url_path}" class="btn btn-primary btn-sm w-100">{$url_text}</a>
+        </div>
+    </div>
+</div>
+
+</body>
+{js href="__JS__/jquery-3.3.1.min.js"}
+{js href="__JS__/bootstrap.bundle.min.js"}
+</html>

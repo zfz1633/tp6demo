@@ -1,0 +1,73 @@
+{extend name='public/base'}
+
+{block name='title'}管理员权限设置{/block}
+
+{block name='main'}
+<!-- 搜索表单-->
+<form action="{:url('/auth')}" class="pb-3">
+    <div class="form-row">
+        <div class="col-form-label">
+            <label for="name">管理员：</label>
+        </div>
+        <div class="col-auto">
+            <input type="text" name="name" id="name" class="form-control" placeholder="查询的管理员">
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary">搜索</button>
+            <a href="{:url('/auth/create')}" class="btn btn-success">添加管理权限</a>
+        </div>
+    </div>
+</form>
+<!--数据列表-->
+<table class="table table-bordered">
+    <thead class="bglight">
+    <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">管理员</th>
+        <th class="text-center">权限</th>
+        <th class="text-center">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {assign name="empty" value='<tr><td colspan="7" class="text-center text-muted">没有数据</td></tr>'}
+    {volist name='$list' id='obj' empty='$empty'}
+    <tr>
+        <td class="text-center">{$obj.id}</td>
+        <td>{$obj.name}</td>
+        <td class="text-center">{$obj.roles}</td>
+        <td class="text-center">
+            <form action="{:url('/auth/'.$obj.id)}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button class="btn alert-danger btn-sm text-center btn-delete">删除</button>
+                <a href="{:url('/auth/'.$obj.id.'/edit')}" class="btn alert-warning btn-sm text-center">修改</a>
+            </form>
+        </td>
+    </tr>
+    {/volist}
+    </tbody>
+</table>
+<h4>Bootstrap 的分页效果(功能没有实现)</h4>
+<ul class="pagination">
+    <li class="page-item active">
+        <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="#">3</a>
+    </li>
+</ul>
+<h4>系统自带改良版</h4>
+{$list|raw}
+{/block}
+
+{block name='js_del'}
+<script type="text/javascript">
+    $('.btn-delete').click(() => {
+        let flag = confirm('真的要删除这条数据吗？');
+        return flag ? true : false;
+    })
+    $('[data-toggle="tooltip"]').tooltip();
+</script>
+{/block}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{block name='title'}{/block}</title>
+    <!-- 移动设备优先 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {css href="__CSS__/bootstrap.min.css"}
+    {css href="__CSS__/style.css"}
+    {js href="__JS__/jquery-3.3.1.min.js"}
+    {js href="__JS__/bootstrap.bundle.min.js"}
+</head>
+<body>
+<!-- 导航-->
+<nav class="navbar navbar-light bg-light shadow-sm">
+    <a href="#">LOGO</a>
+    <div class="nav-item dropdown mr-5">
+        <a class="nav-link dropdown-toggle text-secondary" href="#" data-toggle="dropdown">
+            {:session('admin')}
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">个人中心</a>
+            <a class="dropdown-item" href="{:url('/logout')}">退出管理</a>
+        </div>
+    </div>
+</nav>
+<div class="container pt-5 mt-5">
+    <div class="row align-items-center">
+        <div class="col-3 sidebar">
+            <button class="btn btn-secondary user">用户管理</button>
+            <button class="btn btn-secondary">爱好管理</button>
+            <button class="btn btn-secondary">书籍管理</button>
+            <button class="btn btn-secondary">角色管理</button>
+            <button class="btn btn-secondary auth">权限管理</button>
+        </div>
+        <div class="col-9 main">
+            {block name='main'}{/block}
+        </div>
+    </div>
+</div>
+
+</body>
+{block name='js_del'}{/block}
+<script>
+    $(".user").click(()=>{
+        window.location.href='/user';
+    })
+    $(".auth").click(()=>{
+        window.location.href='/auth';
+    })
+</script>
+</html>
